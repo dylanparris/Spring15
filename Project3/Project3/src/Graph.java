@@ -42,7 +42,11 @@ public class Graph{
 	
 	public String printGraph(){
 		vertices.sort(null);
-		return vertices.toString();
+		String output = "";
+		for(int i = 0; i < vertices.size(); i++){
+			output = output + vertices.get(i).toString();
+		}
+		return output;
 		
 	}
 }
