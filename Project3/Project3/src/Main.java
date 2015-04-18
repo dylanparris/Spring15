@@ -50,12 +50,24 @@ public class Main {
 		System.out.println("Enter Command: ('0' to exit)");
 		String input = s.next();
 		
-		if(input.equals("0")){
+		if(input.equals("quit")){
 			s.close();
 			System.exit(0);
 		} else if(input.equals("print")){
 			String line = g.printGraph();
 			System.out.println(line);
+		} else if(input.contains("addedge")){
+			System.out.println("Add Edge request detected");
+			//TODO
+		} else if(input.contains("deleteedge")){
+			System.out.println("delete edge request detected");
+			//TODO
+		} else if(input.contains("path")){
+			System.out.println("path request detected");
+			//TODO
+		} else if(input.equals("reachable")){
+			System.out.println("reachable request detected");
+			//TODO
 		}
 		
 		menu();
