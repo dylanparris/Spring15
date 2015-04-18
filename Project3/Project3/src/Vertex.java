@@ -56,6 +56,7 @@ public class Vertex implements Comparable<Vertex>{
 	
 	@Override
 	public String toString(){
-		return name;
+		
+		return name + "\n" + edges.toString() + "\n";
 	}
 }

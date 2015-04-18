@@ -39,6 +39,6 @@ public class Edge implements Comparable<Edge>{
 	
 	@Override
 	public String toString(){
-		return destination;
+		return "\n\t" + destination + " " + weight;
 	}
 }
