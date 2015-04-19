@@ -47,8 +47,8 @@ public class Main {
 	
 	public static void menu(){
 		Scanner s = new Scanner(System.in);
-		System.out.println("Enter Command: ('0' to exit)");
-		String input = s.next();
+		System.out.println("Enter Command: ('help' for avaliable commands)");
+		String input = s.nextLine();
 		
 		if(input.equals("quit")){
 			s.close();
@@ -57,17 +57,28 @@ public class Main {
 			String line = g.printGraph();
 			System.out.println(line);
 		} else if(input.contains("addedge")){
-			System.out.println("Add Edge request detected");
-			//TODO
+			String[] command = input.split(" ");
+			System.out.println("Adding Edge from " + command[2] + " to " + command[1] + " with weight " + command[3]);
+			g.addEdge(command[2], command[1], Float.parseFloat(command[3]));
 		} else if(input.contains("deleteedge")){
-			System.out.println("delete edge request detected");
-			//TODO
+			String[] command = input.split(" ");
+			System.out.println("deleting Edge from " +command[2] + "to" + command[1]);
+			g.deleteEdge(command[2], command[1]);
 		} else if(input.contains("path")){
 			System.out.println("path request detected");
 			//TODO
 		} else if(input.equals("reachable")){
 			System.out.println("reachable request detected");
 			//TODO
+		} else if(input.equals("help")){
+			System.out.println("'addedge tailVertex headVertex transmitTime' 	- adds edge to graph");
+			System.out.println("'deleteedge tailVertex headVertex' 		- removes edge to graph");
+			System.out.println("'path fromVertex toVertex' 			- find shortest path between vertices");
+			System.out.println("'print' 					- to print graph with its edges");
+			System.out.println("'reachable' 					- prints all vertices and all vertices that are reachable from each");
+			System.out.println("'quit' 						- Exits Program");
+		} else {
+			System.out.println("Not a valid command use 'help' to see valid commands");
 		}
 		
 		menu();

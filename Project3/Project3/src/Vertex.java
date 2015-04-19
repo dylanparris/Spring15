@@ -30,9 +30,9 @@ public class Vertex implements Comparable<Vertex>{
 	 * removes edge from vertex.
 	 * @param destination - destination of edge.
 	 */
-	public void deleteEdge(String destination){
-		if(!edges.contains(destination)){
-			edges.remove(destination);
+	public void deleteEdge(Edge edge){
+		if(edges.contains(edge)){
+			this.edges.remove(edge);
 		}
 	}
 	

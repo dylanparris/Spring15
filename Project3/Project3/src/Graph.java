@@ -40,6 +40,14 @@ public class Graph{
 		}
 	}
 	
+	public void deleteEdge(String source, String destination){
+		if(vertices.contains(new Vertex(source)) && vertices.contains(new Vertex(destination))){
+			Vertex v = vertices.get(vertices.indexOf(new Vertex(source)));
+			Edge e = v.edges.get(v.edges.indexOf(new Edge(source, destination, (float) 0)));
+			v.deleteEdge(e);
+		}
+	}
+	
 	public String printGraph(){
 		vertices.sort(null);
 		String output = "";
