@@ -62,11 +62,14 @@ public class Main {
 			g.addEdge(command[2], command[1], Float.parseFloat(command[3]));
 		} else if(input.contains("deleteedge")){
 			String[] command = input.split(" ");
-			System.out.println("deleting Edge from " +command[2] + "to" + command[1]);
+			System.out.println("deleting Edge from " +command[2] + " to " + command[1]);
 			g.deleteEdge(command[2], command[1]);
 		} else if(input.contains("path")){
 			System.out.println("path request detected");
 			//TODO
+			String[] command = input.split(" ");
+			System.out.println("shortest path from " +command[2] + " to " + command[1]);
+			g.shortestPath(command[2], command[1]);
 		} else if(input.equals("reachable")){
 			System.out.println("reachable request detected");
 			//TODO
@@ -84,4 +87,6 @@ public class Main {
 		menu();
 	}
 
+	
+	
 }

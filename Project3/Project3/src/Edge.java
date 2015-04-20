@@ -42,4 +42,5 @@ public class Edge implements Comparable<Edge>{
 				
 		return "   " + destination + " " + weight + "\n";
 	}
+	
 }
