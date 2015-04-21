@@ -56,7 +56,6 @@ public class Vertex implements Comparable<Vertex>{
 	
 	@Override
 	public String toString(){
-
 		edges.sort(null);
 		String output = "";
 		for(int i = 0; i < edges.size(); i++){
@@ -66,6 +65,5 @@ public class Vertex implements Comparable<Vertex>{
 			output = output + edges.get(i).toString();
 		}
 		return output;
-		
 	}
 }

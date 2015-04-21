@@ -76,7 +76,7 @@ public class Graph{
 		shortestPath(vertices.get(startIndex), vertices.get(endIndex));
 	}
 	
-	public static void shortestPath(Vertex start, Vertex end){
+	public void shortestPath(Vertex start, Vertex end){
 		PriorityQueue<Edge> minheap=new PriorityQueue<Edge>(1, new Comparator<Edge>(){
 			public int compare(Edge e1, Edge e2){
 				if(e1.weight > e2.weight){
@@ -95,7 +95,6 @@ public class Graph{
 	    for (Iterator<Edge> iterator = minheap.iterator(); iterator.hasNext();) {
 	        //System.out.println("Min : "+ minheap.element());
 	        //System.out.println("Removing " + minheap.element());
-	        
 	        minheap.remove();
 	       // System.out.println(minheap.toString());
 	    }

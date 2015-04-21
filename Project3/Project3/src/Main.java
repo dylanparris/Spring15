@@ -58,17 +58,17 @@ public class Main {
 			System.out.println(line);
 		} else if(input.contains("addedge")){
 			String[] command = input.split(" ");
-			System.out.println("Adding Edge from " + command[2] + " to " + command[1] + " with weight " + command[3]);
+			System.out.println("Adding Edge from " + command[1] + " to " + command[2] + " with weight " + command[3]);
 			g.addEdge(command[2], command[1], Float.parseFloat(command[3]));
 		} else if(input.contains("deleteedge")){
 			String[] command = input.split(" ");
-			System.out.println("deleting Edge from " +command[2] + " to " + command[1]);
+			System.out.println("deleting Edge from " +command[1] + " to " + command[2]);
 			g.deleteEdge(command[2], command[1]);
 		} else if(input.contains("path")){
 			System.out.println("path request detected");
 			//TODO
 			String[] command = input.split(" ");
-			System.out.println("shortest path from " +command[2] + " to " + command[1]);
+			System.out.println("shortest path from " +command[1] + " to " + command[2]);
 			g.shortestPath(command[2], command[1]);
 		} else if(input.equals("reachable")){
 			System.out.println("reachable request detected");
