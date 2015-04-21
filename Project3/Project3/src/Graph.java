@@ -93,11 +93,11 @@ public class Graph{
 	    System.out.println("Minheap---------------------");
 	    System.out.println(minheap.toString());//  		toString(minheap.toArray()));
 	    for (Iterator<Edge> iterator = minheap.iterator(); iterator.hasNext();) {
-	        System.out.println("Min : "+ minheap.element());
-	        System.out.println("Removing " + minheap.element());
+	        //System.out.println("Min : "+ minheap.element());
+	        //System.out.println("Removing " + minheap.element());
 	        
 	        minheap.remove();
-	        System.out.println(minheap.toString());
+	       // System.out.println(minheap.toString());
 	    }
 	}
 }
