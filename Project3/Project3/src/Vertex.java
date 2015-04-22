@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.LinkedList;
 
 
@@ -5,10 +6,16 @@ public class Vertex implements Comparable<Vertex>{
 	
 	String name;
 	LinkedList<Edge> edges;
+	float distance;
+	String predecessor;
+	static final float INFINITY = 2147483645; //Max for 32 bit int
+	
 	
 	public Vertex(String newVertexName){
 		name = newVertexName;
 		edges = new LinkedList<Edge>();
+		distance = INFINITY;
+		predecessor = null;
 	}
 	
 	/**
@@ -56,7 +63,10 @@ public class Vertex implements Comparable<Vertex>{
 	
 	@Override
 	public String toString(){
-		edges.sort(null);
+		edges.sort(new Comparator<Edge>(){
+			public int compare(Edge e1, Edge e2){
+				return e1.destination.compareTo(e2.destination);
+			}});
 		String output = "";
 		for(int i = 0; i < edges.size(); i++){
 			if(i == 0){
@@ -65,5 +75,26 @@ public class Vertex implements Comparable<Vertex>{
 			output = output + edges.get(i).toString();
 		}
 		return output;
+	}
+
+	public void reset() {
+		this.distance = INFINITY;
+		this.predecessor = null;
+	}
+	
+	public void setDistance(float dist){
+		this.distance = dist;
+	}
+	
+	public float getDistance(){
+		return this.distance;
+	}
+	
+	public void setPred(String s){
+		this.predecessor = s;
+	}
+	
+	public String getPred(){
+		return this.predecessor;
 	}
 }

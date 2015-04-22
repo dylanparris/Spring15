@@ -4,7 +4,7 @@ public class MinPQNode implements Comparable<MinPQNode>{
 	String name;
 	float distance;
 	
-	static final int INFINITY = 2147483647;
+	static final int INFINITY = 2147483647; //Max for 32 bit int
 	
 	public MinPQNode(String a){
 		name = a;

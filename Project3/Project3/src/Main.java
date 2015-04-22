@@ -1,5 +1,8 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 
 
@@ -69,7 +72,8 @@ public class Main {
 			//TODO
 			String[] command = input.split(" ");
 			System.out.println("shortest path from " +command[1] + " to " + command[2]);
-			g.shortestPath(command[2], command[1]);
+			//g.shortestPath(command[2], command[1]);
+			dijkstra(g,command[1]);
 		} else if(input.equals("reachable")){
 			System.out.println("reachable request detected");
 			//TODO
@@ -87,6 +91,70 @@ public class Main {
 		menu();
 	}
 
-	
+	public static void dijkstra(Graph graph, String start){
+		PriorityQueue<Vertex> minheap=new PriorityQueue<Vertex>(1);
+		ArrayList<Vertex> path = new ArrayList<Vertex>(10);
+		ArrayList<Edge> availEdges = new ArrayList<Edge>(10);
+		for(int i = 0; i < graph.vertices.size(); i++){
+			
+			graph.vertices.get(i).reset();
+			if(graph.vertices.get(i).name.equals(start)){
+				graph.vertices.get(i).setDistance(0);
+			}
+			minheap.add(graph.vertices.get(i));
+			
+			System.out.println("adding " + graph.vertices.get(i).name + " to min heap");
+			System.out.println("with distance from " + start + ": " + graph.vertices.get(i).distance);
+		}
+		
+		
+		
+		int index;
+		for(int i = 0; i < graph.vertices.size() - 1; i++){ //for each vertex in the graph
+			path.add(minheap.remove());
+			for(int j = 0; j < path.size(); j++){ // for each vertex in the graph
+				//System.out.println(path.get(j).name);
+				for(int k=0; k < path.get(j).edges.size(); k++){ // for each edge in the path
+					//if path doesn't contain what the edge is pointing to vertex already in path
+					if(!path.contains(new Vertex(path.get(j).edges.get(k).destination))){
+						availEdges.add(path.get(j).edges.get(k));
+					}
+				}
+				availEdges.sort(new Comparator<Edge>(){
+					public int compare(Edge e1, Edge e2){
+						if(e1.weight > e2.weight){
+							return 1;
+						} else if (e1.weight == e2.weight){
+							return 0;
+						} else {
+							return -1;
+						}
+					}
+				});
+				if(availEdges.size() != 0){
+					Edge shortest = availEdges.get(0);
+					index = g.vertices.indexOf(new Vertex(shortest.destination));
+					Vertex current = g.vertices.get(index);
+					current.setPred(shortest.source);
+					Vertex pred = g.vertices.get(g.vertices.indexOf(new Vertex(current.getPred())));
+					System.out.println(current.name);
+					System.out.println("predecessor: " + current.getPred());
+					System.out.println("predecessor distance: " + pred.distance);
+					System.out.println("shortest edge distance: " + shortest.weight);
+					float newWeight = pred.distance + shortest.weight;
+					System.out.println("Sum: " + newWeight);
+					System.out.println();
+					current.setDistance(newWeight);
+					path.add(g.vertices.get(index));
+					availEdges = new ArrayList<Edge>(10);
+				}
+			}
+		}
+		
+		for(int i = 0; i < path.size(); i++){
+			System.out.println(path.get(i).name + ": " + path.get(i).distance);
+		}
+		
+	}
 	
 }

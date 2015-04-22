@@ -1,4 +1,3 @@
-
 public class Edge implements Comparable<Edge>{
 	
 	String source;
@@ -20,7 +19,13 @@ public class Edge implements Comparable<Edge>{
 	}
 
 	public int compareTo(Edge otherEdge) {
-		return this.destination.compareTo(otherEdge.destination);
+		if(this.weight > otherEdge.weight){
+			return 1;
+		} else if (this.weight == otherEdge.weight){
+			return 0;
+		} else {
+			return -1;
+		}
 	}
 	
 	@Override

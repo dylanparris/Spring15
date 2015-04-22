@@ -88,6 +88,10 @@ public class Graph{
 				}
 			}
 		});
+		
+		for(int i = 0; i < this.vertices.size(); i++){
+			
+		}
 	    //add elements
 	    minheap.addAll(start.edges);
 	    System.out.println("Minheap---------------------");
