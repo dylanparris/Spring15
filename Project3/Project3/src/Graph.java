@@ -52,55 +52,19 @@ public class Graph{
 		vertices.sort(null);
 		String output = "";
 		for(int i = 0; i < vertices.size(); i++){
-			output = output + vertices.get(i).toString();
+			output = output + vertices.get(i).name + "\n";
+			vertices.get(i).edges.sort(new Comparator<Edge>(){
+				public int compare(Edge e1, Edge e2){
+					return e1.destination.compareTo(e2.destination);
+				}
+			});
+			for(int j = 0; j < vertices.get(i).edges.size(); j++){
+				output += "\t";
+				output += vertices.get(i).edges.get(j).destination + " ";
+				output += vertices.get(i).edges.get(j).weight + "\n";
+			}
 		}
 		return output;
 		
-	}
-	
-	public void shortestPath(String start, String end){
-		int startIndex;
-		int endIndex;
-		if(vertices.contains(new Vertex(start))){
-			startIndex = vertices.indexOf(new Vertex(start));
-		} else {
-			System.out.println(start + " vertex not found in graph");
-			return;
-		}
-		if(vertices.contains(new Vertex(end))){
-			endIndex = vertices.indexOf(new Vertex(end));
-		} else {
-			System.out.println(end + " vertex not found in graph");
-			return;
-		}
-		shortestPath(vertices.get(startIndex), vertices.get(endIndex));
-	}
-	
-	public void shortestPath(Vertex start, Vertex end){
-		PriorityQueue<Edge> minheap=new PriorityQueue<Edge>(1, new Comparator<Edge>(){
-			public int compare(Edge e1, Edge e2){
-				if(e1.weight > e2.weight){
-					return 1;
-				} else if (e1.weight == e2.weight){
-					return 0;
-				} else {
-					return -1;
-				}
-			}
-		});
-		
-		for(int i = 0; i < this.vertices.size(); i++){
-			
-		}
-	    //add elements
-	    minheap.addAll(start.edges);
-	    System.out.println("Minheap---------------------");
-	    System.out.println(minheap.toString());//  		toString(minheap.toArray()));
-	    for (Iterator<Edge> iterator = minheap.iterator(); iterator.hasNext();) {
-	        //System.out.println("Min : "+ minheap.element());
-	        //System.out.println("Removing " + minheap.element());
-	        minheap.remove();
-	       // System.out.println(minheap.toString());
-	    }
 	}
 }

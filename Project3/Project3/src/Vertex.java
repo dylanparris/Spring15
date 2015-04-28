@@ -1,4 +1,3 @@
-import java.util.Comparator;
 import java.util.LinkedList;
 
 
@@ -44,7 +43,13 @@ public class Vertex implements Comparable<Vertex>{
 	}
 	
 	public int compareTo(Vertex otherVertex){
-		return this.name.compareTo(otherVertex.name);
+		if(this.distance > otherVertex.distance){
+			return 1;
+		} else if (this.distance == otherVertex.distance){
+			return 0;
+		} else {
+			return -1;
+		}
 	}
 	
 	@Override
@@ -63,7 +68,7 @@ public class Vertex implements Comparable<Vertex>{
 	
 	@Override
 	public String toString(){
-		edges.sort(new Comparator<Edge>(){
+		/**edges.sort(new Comparator<Edge>(){
 			public int compare(Edge e1, Edge e2){
 				return e1.destination.compareTo(e2.destination);
 			}});
@@ -75,6 +80,8 @@ public class Vertex implements Comparable<Vertex>{
 			output = output + edges.get(i).toString();
 		}
 		return output;
+		**/
+		return this.name;
 	}
 
 	public void reset() {
