@@ -3,21 +3,28 @@ import java.util.*;
 
 
 
+/**
+ * @author Dylan
+ * graph class for project 3
+ */
 public class Graph{
-	
+
 	LinkedList<Vertex> vertices;
-	
+
 	public Graph(){
 		vertices = new LinkedList<Vertex>();
 	}
-	
+
+	/**
+	 * @param newVertexName name of the new vertex;
+	 */
 	public void addVertex(String newVertexName){
 		if(!vertices.contains(new Vertex(newVertexName))){
 			Vertex newVertex = new Vertex(newVertexName);
 			vertices.add(newVertex);
 		}
 	}
-	
+
 	/**
 	 * Adds new edge to graph. Creates vertices if they don't already exist.
 	 * if edge already exists updates weight.
@@ -26,7 +33,7 @@ public class Graph{
 	 * @param weight - weight of edge.
 	 */
 	public void addEdge(String source, String destination, float weight){
-		
+
 		if(vertices.contains(new Vertex(source)) && vertices.contains(new Vertex(destination))){
 			vertices.get(vertices.indexOf(new Vertex(source))).addEdge(destination, weight);
 		} else if (!vertices.contains(new Vertex(source))){
@@ -39,21 +46,29 @@ public class Graph{
 			addEdge(source, destination, weight);
 		}
 	}
-	
+
+	/**
+	 * @param source
+	 * @param destination
+	 */
 	public void deleteEdge(String source, String destination){
 		if(vertices.contains(new Vertex(source)) && vertices.contains(new Vertex(destination))){
 			Vertex v = vertices.get(vertices.indexOf(new Vertex(source)));
-			Edge e = v.edges.get(v.edges.indexOf(new Edge(source, destination, (float) 0)));
+			Edge e = v.edges.get(v.edges.indexOf(new Edge(source, destination, 0)));
 			v.deleteEdge(e);
 		}
 	}
-	
+
+	/**
+	 * @return returns string representation of graph
+	 */
 	public String printGraph(){
 		vertices.sort(null);
 		String output = "";
 		for(int i = 0; i < vertices.size(); i++){
 			output = output + vertices.get(i).name + "\n";
 			vertices.get(i).edges.sort(new Comparator<Edge>(){
+				@Override
 				public int compare(Edge e1, Edge e2){
 					return e1.destination.compareTo(e2.destination);
 				}
@@ -65,6 +80,6 @@ public class Graph{
 			}
 		}
 		return output;
-		
+
 	}
 }
