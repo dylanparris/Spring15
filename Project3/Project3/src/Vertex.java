@@ -68,19 +68,6 @@ public class Vertex implements Comparable<Vertex>{
 	
 	@Override
 	public String toString(){
-		/**edges.sort(new Comparator<Edge>(){
-			public int compare(Edge e1, Edge e2){
-				return e1.destination.compareTo(e2.destination);
-			}});
-		String output = "";
-		for(int i = 0; i < edges.size(); i++){
-			if(i == 0){
-				output += this.name + "\n";
-			}
-			output = output + edges.get(i).toString();
-		}
-		return output;
-		**/
 		return this.name;
 	}
 

@@ -58,24 +58,17 @@ public class Main {
 			s.close();
 			System.exit(0);
 		} else if(input.equals("print")){
-			String line = g.printGraph(); //TODO needs work;
-			System.out.println(line);
+			System.out.println(g.printGraph());
 		} else if(input.contains("addedge")){
 			String[] command = input.split(" ");
-			System.out.println("Adding Edge from " + command[1] + " to " + command[2] + " with weight " + command[3]);
 			g.addEdge(command[2], command[1], Float.parseFloat(command[3]));
 		} else if(input.contains("deleteedge")){
 			String[] command = input.split(" ");
-			System.out.println("deleting Edge from " +command[1] + " to " + command[2]);
 			g.deleteEdge(command[2], command[1]);
 		} else if(input.contains("path")){
-			//System.out.println("path request detected");
 			String[] command = input.split(" ");
-			//System.out.println("shortest path from " +command[1] + " to " + command[2]);
-			//g.shortestPath(command[2], command[1]);
 			System.out.println(dijkstra(g,command[1],command[2]));
 		} else if(input.equals("reachable")){
-			System.out.println("reachable request detected");
 			bfs(g);
 		} else if(input.equals("help")){
 			System.out.println("'addedge tailVertex headVertex transmitTime' 	- adds edge to graph");
@@ -105,14 +98,8 @@ public class Main {
 				graph.vertices.get(i).setDistance(0);
 			}
 			minheapV.add(graph.vertices.get(i));
-			
-			//System.out.println("adding " + graph.vertices.get(i).name + " to min heap");
-			//System.out.println("with distance from " + start + ": " + graph.vertices.get(i).distance);
 		}
-		
-		//System.out.println(minheapV.toString());
-		
-		
+				
 		int index;
 		for(int i = 0; i < graph.vertices.size() - 1; i++){ //for each vertex in the graph
 			path.add(minheapV.remove());
@@ -125,7 +112,6 @@ public class Main {
 			while(!minheapE.isEmpty()){
 								
 				Edge shortest = minheapE.remove();
-//				System.out.println(shortest.toString());
 				index = g.vertices.indexOf(new Vertex(shortest.destination));
 				Vertex current = g.vertices.get(index);
 				Vertex pred = g.vertices.get(g.vertices.indexOf(new Vertex(shortest.source)));
@@ -133,15 +119,7 @@ public class Main {
 				
 				if(current.getDistance() > newWeight){
 					
-					current.setPred(shortest.source);
-					
-//					System.out.println(current.name);
-//					System.out.println("predecessor: " + current.getPred());
-//					System.out.println("predecessor distance: " + pred.distance);
-//					System.out.println("shortest edge distance: " + shortest.weight);
-//					System.out.println("Sum: " + newWeight);
-//					System.out.println();
-					
+					current.setPred(shortest.source);					
 					current.setDistance(newWeight);
 				}
 			}
@@ -171,33 +149,29 @@ public class Main {
     	}});
 		 
 		 for(int root = 0; root < g.vertices.size(); root++){
-         //Adds to end of queue
 			 found = new ArrayList<Vertex>();
 			 queue.add(g.vertices.get(root));
 			 found.add(g.vertices.get(root));
-	 		//System.out.println("New Root");
-	 		//System.out.println(g.vertices.get(root).name);
-
+	 		
 	        while(!queue.isEmpty())
 	        {
-	            //removes from front of queue
 	            Vertex r = queue.remove(); 
 	            
-	
 	            for(Edge n: r.edges){
 	            	Vertex currentVertex = g.vertices.get(g.vertices.indexOf(new Vertex(n.destination)));
 	            	if(!found.contains(currentVertex)){
 	                    queue.add(currentVertex);
 	                    found.add(currentVertex);
-	                    
 	                }
 	            }
 	        }
+	        
 	        System.out.println(found.remove(0).name);
 	        found.sort(new Comparator<Vertex>(){
 	        		public int compare(Vertex v1, Vertex v2){
 	        			return v1.name.compareTo(v2.name);
 	        	}});
+	        
 	        for(int i = 0; i < found.size(); i++){
 	        	System.out.println("\t" + found.get(i).name);
 	        }

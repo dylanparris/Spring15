@@ -91,23 +91,6 @@ public class MinPQ<T extends Comparable<T>> {
         }        
     }
     
-   public void  heapify(int i){
-	   	int left = 2*i;
-        int right = 2*i + 1;
-        int smallest = i;
-
-        if( left <= array.length && array[left].compareTo(array[smallest]) < 0){
-            smallest = left;
-        }
-        if (right <= array.length && array[right].compareTo(array[smallest]) < 0){
-            smallest = right;
-        }
-        if (smallest != i) {
-            swap(i,smallest);
-            heapify(smallest);
-        }
-   }
-    
     /**
      * heapify's after add operation
      */
@@ -122,7 +105,7 @@ public class MinPQ<T extends Comparable<T>> {
     }
     
     /**
-     * check to see if theres a parent
+     * check to see if there is a parent
      * @param i - index of current element
      * @return - true if parent element exists
      */
